@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React, {useState} from 'react'
 import './App.css';
 
 function App() {
+  const [joke, setJoke] = useState({
+    joke: "Click to get a joke"
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 onClick={() => {
+        fetch("https://icanhazdadjoke.com/", {
+          headers: {
+            Accept: "application/json"
+          }
+        })
+          .then((res) => res.text())
+          .then((json) => setJoke(JSON.parse(json)));
+      }}>{joke.joke}</h1>
     </div>
   );
 }
