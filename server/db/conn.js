@@ -11,7 +11,7 @@ module.exports = {
     connectToServer: function(callback) {
         client.connect(function (err, db) {
             if (db) {
-                _db = db.db("Cluster0-dad-joke");
+                _db = db.db("Dad-Joke-Ratings");
                 console.log("connected to mongo");
             }
             return callback(err);
