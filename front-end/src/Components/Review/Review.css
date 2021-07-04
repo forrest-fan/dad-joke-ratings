@@ -1,0 +1,17 @@
+.review {
+    border-bottom: 1px solid #999;
+    padding: 5px 10px;
+}
+
+.review p {
+    margin: 0.4em 0;
+}
+
+.review .name {
+    font-weight: bold;
+}
+
+.review .timestamp {
+    text-align: right;
+    font-size: 14px;
+}

@@ -1,0 +1,38 @@
+#navbar {
+    width: 100%;
+    margin: 0px;
+    padding: 8px 24px;
+    box-shadow: -2px -2px 8px 4px #777;
+}
+
+#navbar li {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 0px 4px;
+}
+
+#navbar #home {
+    font-weight: bold;
+}
+
+#navbar #nav-links {
+    float: right;
+}
+
+#navbar #nav-links li {
+    cursor: pointer;
+}
+
+#navbar #nav-links {
+    color: #bbb;
+}
+
+#navbar #nav-links .active {
+    color: #000;
+}
+
+#navbar #nav-links #login {
+    color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: 5px;
+}

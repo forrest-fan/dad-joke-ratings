@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './Joke.css';
 
+import Review from "../Review/Review";
+
 function Joke() {
-    const [joke, setJoke] = useState({});
+    const [joke, setJoke] = useState({
+        joke: "Click to get a joke",
+        id: 123,
+        stars: 0,
+        count: 0
+    });
     const [rateFormStars, setRateFormStars] = useState(0);
     const [rateFormMessage, setRateFormMessage] = useState('');
     const [rateFormName, setRateFormName] = useState('');
-    const [rating, setRating] = useState({})
-    // const [ratings, setRatings] = useState([]);
+    const [ratings, setRatings] = useState([{
+        stars: 4,
+        message: "Was ok, took a while though.",
+        name: "Joe",
+        timestamp: new Date(1625440182)
+    }]);
 
 
     // useEffect(() => {
@@ -46,6 +57,7 @@ function Joke() {
                                 stars: json2[0].stars,
                                 count: json2[0].count
                             });
+                            setRatings(json2[0].reviews);
                         } else {
                             setJoke({
                                 joke: dadJoke.joke,
@@ -53,6 +65,7 @@ function Joke() {
                                 stars: 0,
                                 count: 0
                             });
+                            setRatings([]);
                         }
                     })
                     .catch((err) => {
@@ -70,73 +83,107 @@ function Joke() {
     }, []);
 
     function newRating() {
-        // Create request body
-        let request = {
-            id: joke.id,
-            stars: rateFormStars,
-            message: rateFormMessage,
-            name: rateFormName
-        };
-        // Post request to express app
-        fetch("http://localhost:5000/ratings/add", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(request)
-        })
-            .then((res) => res.text())
-            .then((text) => {
-                if (text === "success") {
-                    // Success response
-                    alert("successfully added");
-                } else {
-                    // Error response
-                    alert("there was an error");
-                }
+        if (rateFormStars > 0) {
+            // Create request body
+            let request = {
+                id: joke.id,
+                stars: rateFormStars,
+                message: rateFormMessage,
+                name: rateFormName
+            };
+            // Post request to express app
+            fetch("http://localhost:5000/ratings/add", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(request)
             })
-            .catch((err) => {
-                console.log(err);
-            });
+                .then((res) => res.text())
+                .then((text) => {
+                    if (text === "success") {
+                        // Success response
+                        alert("successfully added");
+                        setRatings([ {
+                            stars: request.stars,
+                            name: request.name,
+                            message: request.message,
+                            timestamp: new Date()
+                        }, ...ratings]);
+                        setRateFormMessage("");
+                        setRateFormName("");
+                        setRateFormStars(0);
+                    } else {
+                        // Error response
+                        alert("there was an error");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            alert("Please give a rating from 1 to 5 stars.");
+        }
+        
     }
 
     return (
-        <div className="App">
-            <h1 onClick={getJoke}>{joke.joke}</h1>
+        <div id="joke-container">
+            <div onClick={getJoke} className="the-joke">{joke.joke}</div>
             <div id="reviews">
                 <h2>Reviews</h2>
-                <div className="write-review">
-                    <div>
-                        <input type="number" min="0" max="5" placeholder="stars" name="stars" value={rateFormStars} onChange={(e) => {
-                            setRateFormStars(e.target.value);
-                        }} />
-                        <textarea placeholder="Message" name="message" value={rateFormMessage} onChange={(e) => {
-                            setRateFormMessage(e.target.value);
-                        }} />
-                        <input placeholder="Name" name="name" value={rateFormName} onChange={(e) => {
-                            setRateFormName(e.target.value);
-                        }} />
-                        <button onClick={newRating}>Submit Review</button>
+                <div id="reviews-flex">
+                    <div className="write-review">
+                        <h3>Leave a review</h3>
+                        <div>
+                            <div className="star-container">
+                                <i
+                                    className={"rateStar fa-star " + (rateFormStars > 0 ? "fas" : "far")}
+                                    onClick={() => setRateFormStars(1)}></i>
+                                <i
+                                    className={"rateStar fa-star " + (rateFormStars > 1 ? "fas" : "far")}
+                                    onClick={() => setRateFormStars(2)}></i>
+                                <i
+                                    className={"rateStar fa-star " + (rateFormStars > 2 ? "fas" : "far")}
+                                    onClick={() => setRateFormStars(3)}></i>
+                                <i
+                                    className={"rateStar fa-star " + (rateFormStars > 3 ? "fas" : "far")}
+                                    onClick={() => setRateFormStars(4)}></i>
+                                <i
+                                    className={"rateStar fa-star " + (rateFormStars > 4 ? "fas" : "far")}
+                                    onClick={() => setRateFormStars(5)}></i>
+                            </div>
+                            <textarea placeholder="Message" name="message" maxlength="250" value={rateFormMessage} onChange={(e) => {
+                                setRateFormMessage(e.target.value);
+                            }} ></textarea>
+                            <div className="textarea-counter">{rateFormMessage.length} / 250</div>
+                            <input placeholder="Name" name="name" value={rateFormName} onChange={(e) => {
+                                setRateFormName(e.target.value);
+                            }} />
+                            <button onClick={newRating}>Submit Review</button>
+                        </div>
                     </div>
-                </div>
-                <div className="read-reviews">
-                    <div className="star-container">
-                        <i className={"fa-star " + (joke.stars > 0 ? "fas" : "far")}></i>
-                        <i className={"fa-star " + (joke.stars > 1 ? "fas" : "far")}></i>
-                        <i className={"fa-star " + (joke.stars > 2 ? "fas" : "far")}></i>
-                        <i className={"fa-star " + (joke.stars > 3 ? "fas" : "far")}></i>
-                        <i className={"fa-star " + (joke.stars > 4 ? "fas" : "far")}></i>
-                        {joke.stars} stars
-          </div>
-                    <p>{joke.count > 0 ? joke.count + " reviews" : "No reveiws yet. Be the first to leave one"}</p>
-                    {/* {ratings.map((rate) => {
-            return (
-              <div>
-                <p>Stars: {rate.stars}</p>
-                <p>{rate.count} reviews</p>
-              </div>
-            );
-          })} */}
+                    <div className="read-reviews">
+                        <div className="star-container avg-rating">
+                            <i className={"fa-star " + (joke.stars > 0 ? "fas" : "far")}></i>
+                            <i className={"fa-star " + (joke.stars > 1 ? "fas" : "far")}></i>
+                            <i className={"fa-star " + (joke.stars > 2 ? "fas" : "far")}></i>
+                            <i className={"fa-star " + (joke.stars > 3 ? "fas" : "far")}></i>
+                            <i className={"fa-star " + (joke.stars > 4 ? "fas" : "far")}></i>
+                            <span>{joke.stars}/5 stars</span>
+                        </div>
+                        <p className="review-count">{ratings.length > 1 ? ratings.length + " reviews" : ratings.length === 1 ? "1 review" : "No reviews yet. Be the first to leave one"}</p>
+                        {ratings.map((r) => {
+                            return (
+                                <Review
+                                    stars={r.stars}
+                                    message={r.message}
+                                    name={r.name}
+                                    timestamp={r.timestamp}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

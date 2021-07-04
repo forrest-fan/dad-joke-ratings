@@ -41,7 +41,8 @@ router.route('/ratings/add').post(async function (req, res) {
                         reviews: {
                             stars: stars,
                             name: req.body.name,
-                            message: req.body.message
+                            message: req.body.message,
+                            timestamp: new Date()
                         } 
                     },
                     $set: {
@@ -60,7 +61,8 @@ router.route('/ratings/add').post(async function (req, res) {
                     {
                         stars: stars,
                         name: req.body.name,
-                        message: req.body.message
+                        message: req.body.message,
+                        timestamp: new Date()
                     }
                 ]
             });
