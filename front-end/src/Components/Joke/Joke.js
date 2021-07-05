@@ -38,7 +38,7 @@ function Joke (props) {
                                 message={r.message}
                                 name={r.name}
                                 timestamp={r.timestamp}
-                                key={i} />
+                                key={r.name + "-" + r.stars + "-" + i} />
                             </div>
                         );
                     })}

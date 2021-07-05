@@ -51,7 +51,7 @@ function Explore () {
                             stars={j.stars}
                             count={j.count}
                             reviews={j.reviews}
-                            key={i}
+                            key={j.id + "-" + i}
                             index={i + 1}/>
                     );
                 })}
