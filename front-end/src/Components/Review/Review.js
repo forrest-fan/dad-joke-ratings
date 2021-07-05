@@ -18,7 +18,7 @@ function Review(props) {
                 <p>{props.name.length > 0 ? props.name : "An anonymous joke critic"}</p>
             </div>
             <div className="timestamp">
-                <p>{props.timestamp.toLocaleString()}</p>
+                <p>{new Date(props.timestamp).toLocaleString()}</p>
             </div>
         </div>
     );
