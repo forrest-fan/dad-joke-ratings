@@ -108,6 +108,14 @@ function Joke() {
                         setRateFormMessage("");
                         setRateFormName("");
                         setRateFormStars(0);
+                        let newStars = Math.round((joke.stars * joke.count + request.stars) * 100 / (joke.count + 1)) / 100;
+                        console.log(newStars);
+                        setJoke({
+                            joke: joke.joke,
+                            id: joke.id,
+                            stars: newStars,
+                            count: joke.count + 1
+                        });
                     } else {
                         // Error response
                         alert("There was an error");

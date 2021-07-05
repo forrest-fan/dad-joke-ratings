@@ -5,7 +5,7 @@ import Explore from './Components/Explore/Explore';
 import './App.css';
 
 function App() {
-  const [page, setPage] = useState("explore");
+  const [page, setPage] = useState("jokes");
 
 
   return (
