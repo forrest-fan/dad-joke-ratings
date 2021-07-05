@@ -148,7 +148,7 @@ function Joke() {
                                     className={"rateStar fa-star " + (rateFormStars > 4 ? "fas" : "far")}
                                     onClick={() => setRateFormStars(5)}></i>
                             </div>
-                            <textarea placeholder="Message" name="message" maxlength="250" value={rateFormMessage} onChange={(e) => {
+                            <textarea placeholder="Message" name="message" maxLength="250" value={rateFormMessage} onChange={(e) => {
                                 setRateFormMessage(e.target.value);
                             }} ></textarea>
                             <div className="textarea-counter">{rateFormMessage.length} / 250</div>
