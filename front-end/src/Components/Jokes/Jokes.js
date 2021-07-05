@@ -82,6 +82,7 @@ function Joke() {
             // Create request body
             let request = {
                 id: joke.id,
+                joke: joke.joke,
                 stars: rateFormStars,
                 message: rateFormMessage,
                 name: rateFormName
@@ -98,7 +99,6 @@ function Joke() {
                 .then((text) => {
                     if (text === "success") {
                         // Success response
-                        alert("successfully added");
                         setRatings([ {
                             stars: request.stars,
                             name: request.name,
@@ -110,7 +110,7 @@ function Joke() {
                         setRateFormStars(0);
                     } else {
                         // Error response
-                        alert("there was an error");
+                        alert("There was an error");
                     }
                 })
                 .catch((err) => {
@@ -168,13 +168,14 @@ function Joke() {
                             <span>{joke.stars}/5 stars</span>
                         </div>
                         <p className="review-count">{ratings.length > 1 ? ratings.length + " reviews" : ratings.length === 1 ? "1 review" : "No reviews yet. Be the first to leave one"}</p>
-                        {ratings.map((r) => {
+                        {ratings.map((r, i) => {
                             return (
                                 <Review
                                     stars={r.stars}
                                     message={r.message}
                                     name={r.name}
                                     timestamp={r.timestamp}
+                                    key={i}
                                 />
                             );
                         })}

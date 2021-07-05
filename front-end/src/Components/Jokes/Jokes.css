@@ -34,7 +34,6 @@
 
 .star-container.avg-rating span {
     margin-left: 8px;
-    font-weight: bold;
 }
 
 #reviews h2, #reviews h3 {
@@ -100,4 +99,8 @@
     text-align: center;
     font-size: 18px;
     margin: 0.4em 0;
+}
+
+#reviews #reviews-flex .read-reviews .star-container.avg-rating span {
+    font-weight: bold;
 }

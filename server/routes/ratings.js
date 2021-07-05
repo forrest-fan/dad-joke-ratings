@@ -32,8 +32,7 @@ router.route('/ratings/add').post(async function (req, res) {
         if (ratingById.length > 0) {
             // Update document if joke already exists in db
             let prev = ratingById[0];
-            let newStars = Math.round((prev.stars * prev.count + stars) / (prev.count + 1), 2);
-            console.log(newStars);
+            let newStars = Math.round((prev.stars * prev.count + stars) * 100 / (prev.count + 1)) / 100;
             db_connect.collection("ratings").updateOne(
                 { id: id },
                 {
@@ -54,6 +53,7 @@ router.route('/ratings/add').post(async function (req, res) {
         } else {
             // Insert new document if no reviews yet for this joke
             db_connect.collection("ratings").insertOne({
+                joke: req.body.joke,
                 id: id,
                 stars: stars,
                 count: 1,

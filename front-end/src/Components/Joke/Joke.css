@@ -1,0 +1,47 @@
+.joke {
+    padding: 10px;
+    border-top: 1px solid #777;
+}
+
+.joke .joke-flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.joke .index {
+    width: 50px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.joke .content {
+    flex-grow: 1;
+}
+
+.joke h3, .joke p {
+    margin: 0.4em 0;
+}
+
+.joke .content .avg-rating {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.joke .chevron {
+    width: 50px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+}
+
+.joke .chevron i {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.joke .joke-review-container {
+    padding-left: 100px;
+}

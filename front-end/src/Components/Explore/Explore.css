@@ -2,3 +2,29 @@
     margin: 0px 50px;
     padding: 25px 0px;
 }
+
+#explore h1 {
+    margin: 0.4em 0;
+}
+
+#explore #sort-select {
+    margin: 16px 0px;
+}
+
+#explore #sort-select span {
+    margin: 0px 10px;
+    padding: 6px 12px;
+    border: 3px solid #000;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#explore #sort-select span.selected {
+    background: #000;
+    color: #fff;
+}
+
+#explore #jokes {
+    margin: 32px 10px;
+}
