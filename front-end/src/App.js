@@ -1,5 +1,5 @@
 import React from 'react';
-import Joke from './Components/Joke/Joke';
+import Jokes from './Components/Jokes/Jokes';
 import Navbar from './Components/Navbar/Navbar';
 import './App.css';
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div id="app-container">
       <Navbar />
-      <Joke />
+      <Jokes />
     </div>
   );
 }
