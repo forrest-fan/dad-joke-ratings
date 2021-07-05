@@ -2,7 +2,7 @@
 
 A website where you can explore dad jokes and post your opinion on each one. You can also see how others feel the jokes and find the best ones as rated by the community.
 
-Built using React, Express, Node.js, and MongoDB.
+Built using React, Express, Node.js, and MongoDB. The [icanhazadadjoke API](https://icanhazdadjoke.com/api) was used to source the jokes.
 
 ### Screenshots
 This is the main page where you can read random jokes.
