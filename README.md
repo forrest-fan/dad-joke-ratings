@@ -6,3 +6,7 @@ Built using React, Express, Node.js, and MongoDB.
 
 ### Screenshots
 This is the main page where you can read random jokes.
+![Jokes page](https://github.com/forrest-fan/dad-joke-ratings/blob/a9c09c4d64c9b1e612c9923e11cd683872c86083/screenshots/jokes.jpg)
+
+This is the explore page where you can find top-rated jokes.
+![Explore page](https://github.com/forrest-fan/dad-joke-ratings/blob/a9c09c4d64c9b1e612c9923e11cd683872c86083/screenshots/explore.jpg)
